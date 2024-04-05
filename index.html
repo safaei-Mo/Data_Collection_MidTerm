@@ -86,7 +86,7 @@
     });
 
     view.ui.add(searchWidget, {
-        position: "bottom-right"
+        position: "top-left"
     });
 
     const layer = new FeatureLayer({
@@ -137,7 +137,7 @@
     const polyInfos = {
     layer: layer
 }
-
+layer.title = "New Land Cover Sample";
 // Begin Editor constructor
 const editor = new Editor({
  view: view,
@@ -157,7 +157,7 @@ let legend = new Legend({
 });
 
 view.ui.add(legend, {
-  position: "top-right",
+  position: "bottom-right",
   index: 2
 });
 
