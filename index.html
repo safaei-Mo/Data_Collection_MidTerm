@@ -52,8 +52,10 @@
      "esri/views/MapView",
      "esri/widgets/Locate", 
      "esri/widgets/Search",
-    "esri/layers/FeatureLayer"], 
-(esriConfig, Map, MapView, Locate, Search, FeatureLayer) => {
+    "esri/layers/FeatureLayer",
+"esri/widgets/Editor",
+"esri/widgets/Legend"], 
+(esriConfig, Map, MapView, Locate, Search, FeatureLayer,Editor,Legend) => {
     esriConfig.apiKey = "AAPKbbf1d614464f43d6893e89040496e546zaR0zSPYnguI_N0zab0yje30u1aq2GS4mz7fzZ78FQ-aPa8vIq4PFEd2C6ceqofz";
 
     const map = new Map({
@@ -89,6 +91,32 @@
     });
 
     map.add(layer);
+
+
+    const polyInfos = {
+    layer: layer
+}
+
+// Begin Editor constructor
+const editor = new Editor({
+ view: view,
+ layerInfos: [polyInfos]
+ }); // End Editor constructor
+
+// Add the widget to the view
+view.ui.add(editor, "bottom-left");
+
+
+let legend = new Legend({
+  view: view,
+  layerInfos: [{
+    layer: layer,
+    title: 'Land Cover Samples'
+  }]
+});
+
+view.ui.add(legend, "top-right");
+
 });
 </script>
 
