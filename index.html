@@ -89,8 +89,46 @@
     const layer = new FeatureLayer({
         url: "https://services.arcgis.com/LBbVDC0hKPAnLRpO/arcgis/rest/services/survey123_4dcbcbb5ebb348e3b24b66ae445a80e6/FeatureServer"
     });
+ // Define the UniqueValueRenderer
+ let renderer = {
+      type: "unique-value",
+      field: "Land Cover Code?", // replace with your field name
+      uniqueValueInfos: [] // this will be populated with your unique values
+    };
+
+    // Define your unique values and corresponding colors
+    let uniqueValues = [1, 2, 3, 4, 5, 6];
+    let labels = ["water", "built-up", "bare ground", "forest", "agriculture", "grass"];
+    let colors = [
+      [1, 59, 249], // color for value 1
+      [255, 0, 0], // color for value 2
+      [204, 102, 0], // color for value 3
+      [0, 102, 0], // color for value 4
+      [0, 255, 0], // color for value 5
+      [255, 255, 0]  // color for value 6
+    ];
+
+    uniqueValues.forEach((value, index) => {
+      renderer.uniqueValueInfos.push({
+        value: value,
+        label: labels[index], // add label for the legend
+        symbol: {
+          type: "simple-fill", // change to simple-fill for polygons
+          color: colors[index], // use corresponding color
+          outline: { // polygons also need an outline
+            color: [255, 255, 255],
+            width: 1
+          }
+        }
+      });
+    });
+
+    // Set the renderer on the FeatureLayer
+    layer.renderer = renderer;
 
     map.add(layer);
+
+
 
 
     const polyInfos = {
