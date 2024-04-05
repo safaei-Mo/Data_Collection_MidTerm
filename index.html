@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+ <html>
+  <head>
+
+
+    <meta charset="utf-8" />
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no" />
+
+   <title>Data Collector for AGOL</title>
+   <style>
+    html,
+    body,
+    #viewDiv {
+     padding: 0;
+     margin: 0;
+     height: 100%;
+     width: 100%;
+     .addRecordBtn {
+  position: absolute;
+  z-index: 10;
+  top: 10px;
+  right: 10px;
+  background-color: #0079c1;
+  color: white;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 4px;
+  font-size: 14px;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.addRecordBtn:hover {
+  background-color: #005a87;
+}
+    }
+   </style>
+
+
+
+
+
+   <link rel="stylesheet" href="https://js.arcgis.com/4.26/esri/themes/light/main.css" />
+
+   <script src="https://js.arcgis.com/4.26/"></script>
+
+
+
+   <script>
+    require(["esri/config",
+     "esri/Map", 
+     "esri/views/MapView",
+     "esri/widgets/Locate", 
+     "esri/widgets/Search",
+    "esri/layers/FeatureLayer"], 
+(esriConfig, Map, MapView, Locate, Search, FeatureLayer) => {
+    esriConfig.apiKey = "AAPKbbf1d614464f43d6893e89040496e546zaR0zSPYnguI_N0zab0yje30u1aq2GS4mz7fzZ78FQ-aPa8vIq4PFEd2C6ceqofz";
+
+    const map = new Map({
+        basemap: "satellite"
+    });
+
+    const view = new MapView({
+        container: "viewDiv",
+        map: map,
+        center: [-82.3248, 29.6516], 
+        zoom: 6 
+    });
+
+    const locateBtn = new Locate({
+        view: view
+    });
+
+    view.ui.add(locateBtn, {
+        position: "top-left"
+    });
+
+    const searchWidget = new Search({
+        view: view,
+        source:[]
+    });
+
+    view.ui.add(searchWidget, {
+        position: "bottom-right"
+    });
+
+    const layer = new FeatureLayer({
+        url: "https://services.arcgis.com/LBbVDC0hKPAnLRpO/arcgis/rest/services/survey123_4dcbcbb5ebb348e3b24b66ae445a80e6/FeatureServer"
+    });
+
+    map.add(layer);
+});
+</script>
+
+  </head>
+  <body>
+    <a href="https://arcg.is/14Pajj1"target="_blank" class="addRecordBtn">Add Land Cover Sample </a>
+    <div id="viewDiv"></div>
+  </body>
+</html>
