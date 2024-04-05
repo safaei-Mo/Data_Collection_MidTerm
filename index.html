@@ -30,9 +30,12 @@
   text-decoration: none;
 }
 
-.addRecordBtn:hover {
-  background-color: #005a87;
-}
+.addRecordBtn {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    z-index: 99; /* Ensure it sits on top */
+  }
     }
    </style>
 
@@ -98,7 +101,7 @@
 
     // Define your unique values and corresponding colors
     let uniqueValues = [1, 2, 3, 4, 5, 6];
-    let labels = ["water", "built-up", "bare ground", "forest", "agriculture", "grass"];
+    let labels = ["Water", "Built-up", "Bare ground", "Forest", "Agriculture", "Grass"];
     let colors = [
       [1, 59, 249], // color for value 1
       [255, 0, 0], // color for value 2
@@ -153,7 +156,10 @@ let legend = new Legend({
   }]
 });
 
-view.ui.add(legend, "top-right");
+view.ui.add(legend, {
+  position: "top-right",
+  index: 2
+});
 
 });
 </script>
